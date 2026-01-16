@@ -14,7 +14,7 @@ export default {
           DEFAULT: '#0a0a0a',
           dark: '#000000',
         },
-        surface: {
+        foreground: {
           DEFAULT: '#ffffff',
           muted: '#cccccc',
         },

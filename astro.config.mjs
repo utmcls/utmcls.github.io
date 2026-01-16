@@ -18,20 +18,26 @@ const useServerOutput = enableKeystatic || isVercel;
 // https://astro.build/config
 export default defineConfig({
   integrations: [
+
     {
       name: 'init-postcss',
       hooks: {
         'astro:config:setup': ({ config }) => {
-          // Initialize PostCSS if it doesn't exist
+
           if (!config.style) {
             config.style = {};
           }
           if (!config.style.postcss) {
-            config.style.postcss = { plugins: [] };
+            config.style.postcss = {};
+          }
+          // Only initialize plugins array if it doesn't exist
+          if (!Array.isArray(config.style.postcss.plugins)) {
+            config.style.postcss.plugins = [];
           }
         },
       },
     },
+
     tailwind({
       applyBaseStyles: true,
     }),
