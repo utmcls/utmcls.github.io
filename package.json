@@ -1,0 +1,26 @@
+{
+  "name": "utmcls-website",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "keystatic": "keystatic"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "latest",
+    "@astrojs/vercel": "^2.4.0",
+    "@keystatic/astro": "^5.0.6",
+    "@keystatic/core": "^0.5.48",
+    "astro": "^5.16.9",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0"
+  }
+}
