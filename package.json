@@ -11,6 +11,7 @@
     "keystatic": "keystatic"
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.2",
     "@astrojs/tailwind": "latest",
     "@astrojs/vercel": "^8.0.4",
     "@keystatic/astro": "^5.0.6",
