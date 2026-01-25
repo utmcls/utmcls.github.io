@@ -3,6 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import vercel from '@astrojs/vercel';
+import node from '@astrojs/node';
 
 // Determine build mode:
 // - GitHub Pages: SKIP_KEYSTATIC=true → static build, no Keystatic
@@ -18,6 +19,7 @@ const useServerOutput = enableKeystatic || isVercel;
 
 // https://astro.build/config
 export default defineConfig({
+  trailingSlash: "never",
   integrations: [
 
     {
@@ -49,8 +51,15 @@ export default defineConfig({
   ],
   // Use server mode when Keystatic is enabled or on Vercel, static for GitHub Pages only
   output: useServerOutput ? 'server' : 'static',
-  // Only use Vercel adapter when actually deploying to Vercel, not for local dev
-  adapter: isVercel ? vercel() : undefined,
-  site: 'https://utmcls.github.io',
+  // Use Vercel adapter on Vercel, Node adapter for local SSR dev, no adapter for static builds
+  adapter: isVercel ? vercel() : (useServerOutput ? node({ mode: 'standalone' }) : undefined),
+  
+  site: isVercel ? 'https://utmcls.github.io' : 'http://localhost:4321',
   base: '/',
+  // Server config for local development (not relevant for Vercel)
+  // accept connections from both localhost and 127.0.0.1
+  server: !isVercel ? {
+    host: true,
+    port: 4321,
+  } : undefined,
 });
