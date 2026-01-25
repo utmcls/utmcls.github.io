@@ -19,7 +19,7 @@ const useServerOutput = enableKeystatic || isVercel;
 
 // https://astro.build/config
 export default defineConfig({
-  trailingSlash: "never",
+
   integrations: [
 
     {
@@ -53,8 +53,7 @@ export default defineConfig({
   output: useServerOutput ? 'server' : 'static',
   // Use Vercel adapter on Vercel, Node adapter for local SSR dev, no adapter for static builds
   adapter: isVercel ? vercel() : (useServerOutput ? node({ mode: 'standalone' }) : undefined),
-  
-  site: isVercel ? 'https://utmcls.github.io' : 'http://localhost:4321',
+  site: 'https://utmcls.github.io',
   base: '/',
   // Server config for local development (not relevant for Vercel)
   // accept connections from both localhost and 127.0.0.1
