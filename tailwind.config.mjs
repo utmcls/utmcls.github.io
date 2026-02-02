@@ -45,6 +45,26 @@ export default {
       boxShadow: {
         card: '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06)',
       },
+      // Explicit typography theme so prose/prose-slate are configured and use design tokens.
+      // @tailwindcss/typography merges this with its defaults and generates .prose, .prose-slate, etc.
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '65ch',
+            color: 'var(--color-muted-foreground)',
+            '--tw-prose-body': 'var(--color-muted-foreground)',
+            '--tw-prose-headings': 'var(--color-foreground)',
+            '--tw-prose-links': 'var(--color-accent)',
+          },
+        },
+        slate: {
+          css: {
+            '--tw-prose-body': 'var(--color-muted-foreground)',
+            '--tw-prose-headings': 'var(--color-foreground)',
+            '--tw-prose-links': 'var(--color-accent)',
+          },
+        },
+      },
     },
   },
   plugins: [typography],
