@@ -14,15 +14,6 @@ const siteUrl = process.env.PUBLIC_SITE_URL ?? (isVercel ? undefined : 'http://l
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    // Keystatic config is bundled for the Admin UI (client). Without this, process.env.VERCEL
-    // is undefined in the client bundle, so config sees storage: 'local' and the Admin UI
-    // shows no GitHub login/branch. Inline VERCEL at build time so prod sees GitHub storage.
-    define: {
-      'process.env.VERCEL': JSON.stringify(process.env.VERCEL ?? ''),
-    },
-  },
-
   integrations: [
 
     {

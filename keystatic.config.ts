@@ -1,8 +1,8 @@
 import { config, collection, singleton, fields } from '@keystatic/core';
 
-// Local dev: kind 'local' (files on disk). Prod (Vercel): GitHub storage.
-// Use typeof so this is safe when config is bundled for the browser (Keystatic UI).
-const isProd = typeof process !== 'undefined' && process.env.VERCEL === '1';
+// Local dev: kind 'local' (files on disk). Production build: GitHub storage.
+// In the browser, `process` is usually undefined, so rely on Vite's PROD flag first.
+const isProd = import.meta.env?.PROD ?? process.env.VERCEL === '1';
 
 export default config({
   storage: isProd
