@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { reader } from '../lib/keystatic-reader';
 import { renderMarkdocToHtml, renderMarkdocValueToHtml } from '../lib/render-markdoc';
 import { toAbsoluteHref } from '../lib/url';
 
+const { reader } = await import('../lib/keystatic-reader');
 const opts = { resolveLinkedFiles: true as const };
 const [hero, cta, footer, eventsList, teamList] = await Promise.all([
   reader.singletons.hero.read(opts),
