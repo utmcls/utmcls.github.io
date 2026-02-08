@@ -27,8 +27,6 @@ async function getMarkdocHtml(value: unknown): Promise<string> {
 
 const ctaBodyHtml = await getMarkdocHtml(cta?.body);
 
-const materialIconStyle = "font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48";
-const materialIconStyleSm = "font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24";
 ---
 
 <BaseLayout title="UTM CLS">
@@ -97,7 +95,7 @@ const materialIconStyleSm = "font-variation-settings: 'FILL' 0, 'wght' 400, 'GRA
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <article class="rounded-xl border border-border bg-card p-6 shadow-card">
             <div class="mb-4 flex items-center justify-center text-accent" aria-hidden>
-              <span class="material-symbols-outlined text-[3rem]" style={materialIconStyle}>code</span>
+              <img src="/icons/code-solid-full.svg" alt="" class="size-12" loading="lazy" decoding="async" />
             </div>
             <h3 class="mb-2 font-semibold text-foreground">Coding Workshops</h3>
             <p class="mb-4 text-sm text-muted-foreground">Hands-on sessions with Python, NLTK, spaCy, and Hugging Face transformers suitable for all skill levels.</p>
@@ -105,7 +103,7 @@ const materialIconStyleSm = "font-variation-settings: 'FILL' 0, 'wght' 400, 'GRA
           </article>
           <article class="rounded-xl border border-border bg-card p-6 shadow-card">
             <div class="mb-4 flex items-center justify-center text-accent" aria-hidden>
-              <span class="material-symbols-outlined text-[3rem]" style={materialIconStyle}>biotech</span>
+              <img src="/icons/microscope-solid-full.svg" alt="" class="size-12" loading="lazy" decoding="async" />
             </div>
             <h3 class="mb-2 font-semibold text-foreground">Research Projects</h3>
             <p class="mb-4 text-sm text-muted-foreground">Collaborate on semester-long research projects. Opportunities to work with graduate mentors.</p>
@@ -113,7 +111,7 @@ const materialIconStyleSm = "font-variation-settings: 'FILL' 0, 'wght' 400, 'GRA
           </article>
           <article class="rounded-xl border border-border bg-card p-6 shadow-card">
             <div class="mb-4 flex items-center justify-center text-accent" aria-hidden>
-              <span class="material-symbols-outlined text-[3rem]" style={materialIconStyle}>podium</span>
+              <img src="/icons/microphone-solid-full.svg" alt="" class="size-12" loading="lazy" decoding="async" />
             </div>
             <h3 class="mb-2 font-semibold text-foreground">Guest Lectures</h3>
             <p class="mb-4 text-sm text-muted-foreground">Learn from graduate students and researchers about their latest work in Computational Linguistics.</p>
@@ -121,7 +119,7 @@ const materialIconStyleSm = "font-variation-settings: 'FILL' 0, 'wght' 400, 'GRA
           </article>
           <article class="rounded-xl border border-border bg-card p-6 shadow-card">
             <div class="mb-4 flex items-center justify-center text-accent" aria-hidden>
-              <span class="material-symbols-outlined text-[3rem]" style={materialIconStyle}>work</span>
+              <img src="/icons/briefcase-solid-full.svg" alt="" class="size-12" loading="lazy" decoding="async" />
             </div>
             <h3 class="mb-2 font-semibold text-foreground">Career Development</h3>
             <p class="mb-4 text-sm text-muted-foreground">Resume reviews, interview prep for AI roles, and networking with alumni.</p>
@@ -238,12 +236,12 @@ const materialIconStyleSm = "font-variation-settings: 'FILL' 0, 'wght' 400, 'GRA
                   <div class="mt-4 flex justify-center items-center gap-4 text-accent">
                     {entry.linkedin && (
                       <a href={toAbsoluteHref(entry.linkedin)} class="inline-flex items-center justify-center size-8 hover:opacity-80" aria-label="LinkedIn">
-                        <i class="fa-brands fa-linkedin text-xl leading-none" aria-hidden />
+                        <img src="/icons/linkedin-brands-solid-full.svg" alt="" class="size-5" loading="lazy" decoding="async" />
                       </a>
                     )}
                     {entry.email && (
                       <a href={`mailto:${entry.email}`} class="inline-flex items-center justify-center size-8 hover:opacity-80" aria-label="Email">
-                        <span class="material-symbols-outlined text-[1.25rem] leading-none" style={materialIconStyleSm} aria-hidden>mail</span>
+                        <img src="/icons/envelope-regular-full.svg" alt="" class="size-5" loading="lazy" decoding="async" />
                       </a>
                     )}
                   </div>
@@ -266,10 +264,10 @@ const materialIconStyleSm = "font-variation-settings: 'FILL' 0, 'wght' 400, 'GRA
             <p class="mt-2 text-sm text-footer-foreground-muted">{footer?.tagline ?? 'UTM Computational Linguistics Society. Run by students, for students.'}</p>
             <div class="mt-4 flex justify-center gap-4 md:justify-start text-footer-foreground-muted">
               <a href="https://www.instagram.com/utmcls/" class="hover:text-footer-foreground text-xl" aria-label="Instagram">
-                <i class="fa-brands fa-instagram" aria-hidden />
+                <img src="/icons/instagram-brands-solid-full.svg" alt="" class="size-5" loading="lazy" decoding="async" />
               </a>
               <a href="mailto:utm.cls@studentorg.utoronto.ca" class="hover:text-footer-foreground" aria-label="Email">
-                <span class="material-symbols-outlined text-[1.25rem] align-middle" style={materialIconStyleSm} aria-hidden>mail</span>
+                <img src="/icons/envelope-regular-full.svg" alt="" class="size-5 align-middle" loading="lazy" decoding="async" />
               </a>
             </div>
           </div>
