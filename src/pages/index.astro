@@ -242,6 +242,11 @@ const ctaBodyHtml = await getMarkdocHtml(cta?.body);
                         <img src="/icons/linkedin-brands-solid-full.svg" alt="" class="size-5" loading="lazy" decoding="async" />
                       </a>
                     )}
+                    {entry.personalWebsite && (
+                      <a href={toAbsoluteHref(entry.personalWebsite)} class="inline-flex items-center justify-center size-8 hover:opacity-80" aria-label="Personal website">
+                        <img src="/icons/user-regular-full.svg" alt="" class="size-5" loading="lazy" decoding="async" />
+                      </a>
+                    )}
                     {entry.email && (
                       <a href={`mailto:${entry.email}`} class="inline-flex items-center justify-center size-8 hover:opacity-80" aria-label="Email">
                         <img src="/icons/envelope-regular-full.svg" alt="" class="size-5" loading="lazy" decoding="async" />

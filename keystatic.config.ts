@@ -60,6 +60,7 @@ export default config({
           publicPath: '/team/',
         }),
         linkedin: fields.url({ label: 'LinkedIn URL' }),
+        personalWebsite: fields.url({ label: 'Personal website URL' }),
         email: fields.text({ label: 'Email' }),
       },
     }),
