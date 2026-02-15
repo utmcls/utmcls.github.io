@@ -6,13 +6,15 @@ const isProd = import.meta.env?.PROD ?? process.env.VERCEL === '1';
 
 export default config({
   ui: {
-    navigation: [
+    navigation: {
+    'Landing Page' : [
       'hero',
       'events',
       'cta',
       'team',
       'footer',
     ],
+    },
   },
   storage: isProd
     ? {
