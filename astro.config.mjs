@@ -19,6 +19,9 @@ function keystaticLite() {
         updateConfig({
           server: config.server?.host ? {} : { host: '127.0.0.1' },
           vite: {
+            resolve: {
+              dedupe: ['react', 'react-dom', 'react/jsx-runtime'],
+            },
             plugins: [{
               name: 'keystatic-config-resolver',
               resolveId(id) {
@@ -30,9 +33,13 @@ function keystaticLite() {
             }],
             optimizeDeps: {
               include: [
+                'react',
+                'react-dom',
+                'react/jsx-runtime',
                 '@keystatic/astro/ui',
                 '@keystatic/astro/api',
                 '@keystatic/core/ui',
+                '@keystatic/core',
                 'lodash/debounce.js',
               ],
             },

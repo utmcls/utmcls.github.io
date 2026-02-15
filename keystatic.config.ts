@@ -5,6 +5,15 @@ import { config, collection, singleton, fields } from '@keystatic/core';
 const isProd = import.meta.env?.PROD ?? process.env.VERCEL === '1';
 
 export default config({
+  ui: {
+    navigation: [
+      'hero',
+      'events',
+      'cta',
+      'team',
+      'footer',
+    ],
+  },
   storage: isProd
     ? {
         kind: 'github',
