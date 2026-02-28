@@ -10,22 +10,22 @@
   /* Page */
   --color-background: #ffffff;
   --color-foreground: #1e293b;
-  --color-foreground-muted: #64748b;
+  --color-foreground-muted: #475569;
   --color-border: #e2e8f0;
   --color-muted: #f1f5f9;
-  --color-muted-foreground: #64748b;
+  --color-muted-foreground: #475569;
   --color-card: #ffffff;
 
-  /* Brand / accent */
+  /* Brand / accent – darker for sufficient contrast on white (links, highlights) */
   --color-primary: #0f172a;
   --color-primary-foreground: #ffffff;
-  --color-accent: #38bdf8;
-  --color-accent-foreground: #0f172a;
+  --color-accent: #0284c7;
+  --color-accent-foreground: #ffffff;
 
   /* Footer: main area = same light gray as CTA (muted), bottom strip = blue */
   --color-footer-bg: #f1f5f9;
   --color-footer-foreground: #1e293b;
-  --color-footer-foreground-muted: #64748b;
+  --color-footer-foreground-muted: #475569;
   --color-footer-strip-bg: #38bdf8;
   --color-footer-strip-foreground: #0f172a;
 
@@ -47,5 +47,9 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+  }
+  /* Links using accent color are underlined so they don’t rely on color alone (a11y) */
+  a.text-accent {
+    text-decoration: underline;
   }
 }
