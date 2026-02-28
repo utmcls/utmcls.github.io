@@ -173,9 +173,19 @@ const ctaBodyHtml = await getMarkdocHtml(cta?.body);
                     {entry.details && <span class="mt-1 block text-muted-foreground">{entry.details}</span>}
                   </td>
                   <td class="px-5 py-4">
-                    <span class="inline-flex rounded-full px-2.5 py-1 text-xs font-medium bg-muted text-muted-foreground border border-border">
-                      {entry.type ?? '—'}
-                    </span>
+                    {(() => {
+                      const types = entry.types ?? [];
+                      if (types.length === 0) return '—';
+                      return (
+                        <span class="flex flex-wrap gap-1.5">
+                          {types.map((t) => (
+                            <span class="inline-flex rounded-full px-2.5 py-1 text-xs font-medium bg-muted text-muted-foreground border border-border">
+                              {t}
+                            </span>
+                          ))}
+                        </span>
+                      );
+                    })()}
                   </td>
                   <td class="px-5 py-4">
                     {entry.registerUrl ? (

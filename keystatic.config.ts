@@ -30,7 +30,7 @@ export default config({
       label: 'Events',
       slugField: 'title',
       path: 'content/events/*/',
-      columns: ['title', 'datetime', 'endDatetime', 'type'],
+      columns: ['title', 'datetime', 'endDatetime', 'types'],
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
         datetime: fields.datetime({ label: 'Date & time', description: 'When the event starts' }),
@@ -40,7 +40,14 @@ export default config({
           validation: { isRequired: false },
         }),
         details: fields.text({ label: 'Details (e.g. location or speaker)', multiline: true }),
-        type: fields.text({ label: 'Type', description: 'e.g. Workshop, Lecture, Hackathon' }),
+        types: fields.array(
+          fields.text({ label: 'Type' }),
+          {
+            label: 'Types',
+            description: 'Add one or more event types (e.g. Workshop, Lecture, Hackathon)',
+            itemLabel: (props) => (props as { value?: string })?.value ?? 'Type',
+          }
+        ),
         registerUrl: fields.url({ label: 'Link URL' }),
         linkLabel: fields.text({ label: 'Link display text', description: 'Text shown on the button (e.g. Register, Sign up)', defaultValue: 'Link' }),
       },

@@ -2,6 +2,7 @@ title: Annual General Meeting
 datetime: 2026-02-04T17:00:00.000Z
 endDatetime: 2026-02-04T19:00:00.000Z
 details: Our first general meeting! Taking place in MN3180
-type: Meeting
+types:
+  - Meeting
 registerUrl: https://www.instagram.com/p/DUJVTmAAauH/
 linkLabel: Instagram Post
