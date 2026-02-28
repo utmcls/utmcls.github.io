@@ -136,72 +136,123 @@ const ctaBodyHtml = await getMarkdocHtml(cta?.body);
       <div class="mx-auto max-w-6xl">
         <h2 class="mb-4 text-3xl font-bold text-primary">## Events</h2>
         <p class="mb-8 text-muted-foreground">Join our workshops, lectures, and socials.</p>
-        <div class="overflow-x-auto rounded-xl border border-border">
-          <table class="w-full text-left text-sm">
-            <thead class="border-b border-border bg-muted/50">
-              <tr>
-                <th class="px-5 py-4 font-semibold text-foreground">DATE & TIME</th>
-                <th class="px-5 py-4 font-semibold text-foreground">DETAILS</th>
-                <th class="px-5 py-4 font-semibold text-foreground">TYPE</th>
-                <th class="px-5 py-4 font-semibold text-foreground">LINK</th>
-              </tr>
-            </thead>
-            <tbody>
-              {eventsList?.map(({ slug, entry }) => (
-                <tr class="border-b border-border last:border-0">
-                  <td class="px-5 py-4">
-                    {entry.datetime ? (() => {
-                      const start = new Date(entry.datetime);
-                      const end = entry.endDatetime ? new Date(entry.endDatetime) : null;
-                      const timeOpts = { hour: 'numeric', minute: '2-digit', hour12: true } as const;
-                      return (
-                        <>
-                          <span class="font-medium text-accent">
-                            {start.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })}
-                          </span>
-                          <span class="mt-1 block text-xs text-muted-foreground">
-                            {end
-                              ? `${start.toLocaleTimeString('en-CA', timeOpts)} – ${end.toLocaleTimeString('en-CA', timeOpts)}`
-                              : start.toLocaleTimeString('en-CA', timeOpts)}
-                          </span>
-                        </>
-                      );
-                    })() : '—'}
-                  </td>
-                  <td class="px-5 py-4">
-                    <span class="font-semibold text-foreground">{entry.title}</span>
-                    {entry.details && <span class="mt-1 block text-muted-foreground">{entry.details}</span>}
-                  </td>
-                  <td class="px-5 py-4">
-                    {(() => {
-                      const types = entry.types ?? [];
-                      if (types.length === 0) return '—';
-                      return (
-                        <span class="flex flex-wrap gap-1.5">
-                          {types.map((t) => (
-                            <span class="inline-flex rounded-full px-2.5 py-1 text-xs font-medium bg-muted text-muted-foreground border border-border">
-                              {t}
+        {eventsList && eventsList.length > 0 ? (
+          <>
+            <div class="hidden md:block overflow-x-auto rounded-xl border border-border">
+              <table class="w-full text-left text-sm">
+                <thead class="border-b border-border bg-muted/50">
+                  <tr>
+                    <th class="px-5 py-4 font-semibold text-foreground">DATE & TIME</th>
+                    <th class="px-5 py-4 font-semibold text-foreground">DETAILS</th>
+                    <th class="px-5 py-4 font-semibold text-foreground">TYPE</th>
+                    <th class="px-5 py-4 font-semibold text-foreground">LINK</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {eventsList.map(({ slug, entry }) => (
+                    <tr class="border-b border-border last:border-0">
+                      <td class="px-5 py-4">
+                        {entry.datetime ? (() => {
+                          const start = new Date(entry.datetime);
+                          const end = entry.endDatetime ? new Date(entry.endDatetime) : null;
+                          const timeOpts = { hour: 'numeric', minute: '2-digit', hour12: true } as const;
+                          return (
+                            <>
+                              <span class="font-medium text-accent">
+                                {start.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })}
+                              </span>
+                              <span class="mt-1 block text-xs text-muted-foreground">
+                                {end
+                                  ? `${start.toLocaleTimeString('en-CA', timeOpts)} – ${end.toLocaleTimeString('en-CA', timeOpts)}`
+                                  : start.toLocaleTimeString('en-CA', timeOpts)}
+                              </span>
+                            </>
+                          );
+                        })() : '—'}
+                      </td>
+                      <td class="px-5 py-4">
+                        <span class="font-semibold text-foreground">{entry.title}</span>
+                        {entry.details && <span class="mt-1 block text-muted-foreground">{entry.details}</span>}
+                      </td>
+                      <td class="px-5 py-4">
+                        {(() => {
+                          const types = entry.types ?? [];
+                          if (types.length === 0) return '—';
+                          return (
+                            <span class="flex flex-wrap gap-1.5">
+                              {types.map((t) => (
+                                <span class="inline-flex rounded-full px-2.5 py-1 text-xs font-medium bg-muted text-muted-foreground border border-border">
+                                  {t}
+                                </span>
+                              ))}
                             </span>
-                          ))}
+                          );
+                        })()}
+                      </td>
+                      <td class="px-5 py-4">
+                        {entry.registerUrl ? (
+                          <a href={toAbsoluteHref(entry.registerUrl)} class="text-accent hover:underline">
+                            {entry.linkLabel ?? 'Link'}
+                          </a>
+                        ) : (
+                          '—'
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="md:hidden flex gap-4 overflow-x-auto pb-2 -mx-5 px-5 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;"
+              role="list"
+              aria-label="Upcoming events"
+            >
+              {eventsList.map(({ slug, entry }) => {
+                const start = entry.datetime ? new Date(entry.datetime) : null;
+                const end = entry.endDatetime ? new Date(entry.endDatetime) : null;
+                const timeOpts = { hour: 'numeric', minute: '2-digit', hour12: true } as const;
+                const types = entry.types ?? [];
+                return (
+                  <article
+                    class="flex-shrink-0 w-[min(280px,85vw)] snap-start rounded-xl border border-border bg-card p-5 shadow-card"
+                    role="listitem"
+                  >
+                    {start && (
+                      <p class="mb-2">
+                        <span class="font-semibold text-accent">
+                          {start.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })}
                         </span>
-                      );
-                    })()}
-                  </td>
-                  <td class="px-5 py-4">
+                        <span class="ml-1 text-xs text-muted-foreground">
+                          {end
+                            ? `${start.toLocaleTimeString('en-CA', timeOpts)} – ${end.toLocaleTimeString('en-CA', timeOpts)}`
+                            : start.toLocaleTimeString('en-CA', timeOpts)}
+                        </span>
+                      </p>
+                    )}
+                    <h3 class="font-semibold text-foreground">{entry.title}</h3>
+                    {entry.details && <p class="mt-1 text-sm text-muted-foreground">{entry.details}</p>}
+                    {types.length > 0 && (
+                      <div class="mt-2 flex flex-wrap gap-1.5">
+                        {types.map((t) => (
+                          <span class="inline-flex rounded-full px-2.5 py-1 text-xs font-medium bg-muted text-muted-foreground border border-border">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     {entry.registerUrl ? (
-                      <a href={toAbsoluteHref(entry.registerUrl)} class="inline-flex rounded-lg border border-accent bg-transparent px-4 py-2 text-sm font-medium text-accent hover:bg-accent/10">
+                      <a href={toAbsoluteHref(entry.registerUrl)} class="mt-3 inline-block text-sm text-accent hover:underline">
                         {entry.linkLabel ?? 'Link'}
                       </a>
-                    ) : (
-                      '—'
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {(!eventsList || eventsList.length === 0) && (
+                    ) : null}
+                  </article>
+                );
+              })}
+            </div>
+          </>
+        ) : (
           <p class="mt-4 text-muted-foreground">No upcoming events. Check back later.</p>
         )}
       </div>

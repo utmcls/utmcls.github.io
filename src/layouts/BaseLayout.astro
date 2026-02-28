@@ -21,18 +21,55 @@ import Logo from '../components/Logo.astro';
     <title>{title}</title>
   </head>
   <body class="bg-background text-foreground min-h-screen font-sans antialiased">
-    <header class="sticky top-0 z-10 border-b border-border bg-background">
+    <header class="sticky top-0 z-10 relative border-b border-border bg-background">
       <nav class="mx-auto flex max-w-6xl h-16 items-center justify-between gap-4 px-5" aria-label="Main">
         <Logo />
-        <div class="flex items-center gap-6">
+        <div class="hidden md:flex items-center gap-6">
           <a href="/#activities" class="text-sm text-muted-foreground hover:text-foreground">/activities</a>
           <a href="/#events" class="text-sm text-muted-foreground hover:text-foreground">/events</a>
           <a href="/#media" class="text-sm text-muted-foreground hover:text-foreground">/media</a>
           <a href="/#team" class="text-sm text-muted-foreground hover:text-foreground">/team</a>
           <a href="/#media" class="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-foreground hover:opacity-90">Join Us</a>
         </div>
+        <button
+          type="button"
+          class="md:hidden p-2 -m-2 text-muted-foreground hover:text-foreground aria-expanded:bg-muted rounded"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          id="nav-toggle"
+        >
+          <img src="/icons/bars-solid-full.svg" alt="" class="w-6 h-6" width="24" height="24" />
+        </button>
       </nav>
+      <div id="nav-menu" class="md:hidden hidden absolute top-full left-0 right-0 border-b border-border bg-background px-5 py-4 flex flex-col gap-3" aria-hidden="true">
+        <a href="/#activities" class="text-sm text-muted-foreground hover:text-foreground nav-menu-link">/activities</a>
+        <a href="/#events" class="text-sm text-muted-foreground hover:text-foreground nav-menu-link">/events</a>
+        <a href="/#media" class="text-sm text-muted-foreground hover:text-foreground nav-menu-link">/media</a>
+        <a href="/#team" class="text-sm text-muted-foreground hover:text-foreground nav-menu-link">/team</a>
+        <a href="/#media" class="text-sm font-medium text-accent hover:underline nav-menu-link">Join Us</a>
+      </div>
     </header>
+    <script>
+      const toggle = document.getElementById('nav-toggle');
+      const menu = document.getElementById('nav-menu');
+      const links = document.querySelectorAll('.nav-menu-link');
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!open));
+          menu.classList.toggle('hidden', open);
+          menu.setAttribute('aria-hidden', String(open));
+        });
+        links.forEach((link) => {
+          link.addEventListener('click', () => {
+            toggle.setAttribute('aria-expanded', 'false');
+            menu.classList.add('hidden');
+            menu.setAttribute('aria-hidden', 'true');
+          });
+        });
+      }
+    </script>
     <slot />
   </body>
 </html>
