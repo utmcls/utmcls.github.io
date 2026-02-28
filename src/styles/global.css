@@ -29,10 +29,6 @@
   --color-footer-strip-bg: #38bdf8;
   --color-footer-strip-foreground: #0f172a;
 
-  /* Event type tags (unchanged by theme for now) */
-  --color-tag-workshop: #38bdf8;
-  --color-tag-lecture: #22c55e;
-  --color-tag-hackathon: #ec4899;
 }
 
 /* Future: light theme override
