@@ -2,6 +2,7 @@
 export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
 import { renderMarkdocToHtml, renderMarkdocValueToHtml } from '../lib/render-markdoc';
 import { toAbsoluteHref } from '../lib/url';
 
@@ -28,6 +29,19 @@ async function getMarkdocHtml(value: unknown): Promise<string> {
 }
 
 const ctaBodyHtml = await getMarkdocHtml(cta?.body);
+
+const teamImageModules = import.meta.glob<{ default: import('astro').ImageMetadata }>('../assets/team/**/*.{jpg,jpeg,png}');
+
+const teamListWithImages = teamList
+  ? await Promise.all(
+      teamList.map(async ({ slug, entry }) => {
+        const imagePath = entry.image?.replace(/^src\//, '../');
+        const loader = imagePath ? teamImageModules[imagePath] : null;
+        const image = loader ? (await loader()).default : null;
+        return { slug, entry, image };
+      })
+    )
+  : [];
 
 ---
 
@@ -284,12 +298,18 @@ const ctaBodyHtml = await getMarkdocHtml(cta?.body);
         <p class="mb-10 text-muted-foreground">
           The representatives of our organization. Important information regarding club organization can be found on our <a class="text-accent" href={toAbsoluteHref('https://sop.utoronto.ca/wp-content/uploads/2025/11/utm-computational-linguistics-society-utmcls-2025-11-16.pdf')}>constitution</a>.
         </p>
-        {teamList && teamList.length > 0 ? (
+        {teamListWithImages.length > 0 ? (
           <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
-            {teamList.map(({ slug, entry }) => (
+            {teamListWithImages.map(({ slug, entry, image }) => (
               <article class="w-full max-w-[320px] rounded-xl border border-border bg-card p-0 shadow-card overflow-hidden">
-                {entry.image ? (
-                  <img src={entry.image} alt={entry.name ?? 'Team member'} class="aspect-[4/3] w-full border-b border-border object-cover" />
+                {image ? (
+                  <Image
+                    src={image}
+                    alt={entry.name ?? 'Team member'}
+                    width={320}
+                    height={240}
+                    class="aspect-[4/3] w-full border-b border-border object-cover"
+                  />
                 ) : (
                   <div class="aspect-[4/3] w-full border-b border-border bg-muted" aria-hidden />
                 )}

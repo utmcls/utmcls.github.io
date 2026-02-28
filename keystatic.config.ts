@@ -63,8 +63,8 @@ export default config({
         description: fields.text({ label: 'Description', multiline: true }),
         image: fields.image({
           label: 'Photo',
-          directory: 'public/team',
-          publicPath: '/team/',
+          directory: 'src/assets/team',
+          publicPath: 'src/assets/team/',
         }),
         linkedin: fields.url({ label: 'LinkedIn URL' }),
         personalWebsite: fields.url({ label: 'Personal website URL' }),
