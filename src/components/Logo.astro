@@ -1,9 +1,12 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+
 interface Props {
   class?: string;
 }
 const { class: className = '' } = Astro.props;
 ---
 <a href="/" class={`inline-flex items-center hover:opacity-90 ${className}`} aria-label="UTMCLS home">
-  <img src="/icons/logo.png" alt="UTMCLS" class="h-14 w-auto object-contain" />
+  <Image src={logo} alt="UTMCLS" height={56} class="h-14 w-auto object-contain" />
 </a>
