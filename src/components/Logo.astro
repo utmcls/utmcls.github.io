@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import logo from '../assets/logo-black.svg';
 
 interface Props {
@@ -8,5 +7,5 @@ interface Props {
 const { class: className = '' } = Astro.props;
 ---
 <a href="/" class={`inline-flex items-center hover:opacity-90 ${className}`} aria-label="UTMCLS home">
-  <Image src={logo} alt="UTMCLS" height={56} class="h-14 w-auto object-contain" loading="eager" />
+  <img src={logo?.src} alt="UTMCLS" height={56} class="h-14 w-auto object-contain" />
 </a>
