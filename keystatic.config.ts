@@ -77,8 +77,6 @@ export default config({
       label: 'Hero',
       path: 'content/hero/',
       schema: {
-        statusLabel: fields.text({ label: 'Status label', defaultValue: 'Applications Open' }),
-        statusDot: fields.checkbox({ label: 'Show green status dot', defaultValue: true }),
         primaryButtonLabel: fields.text({ label: 'Primary button label', defaultValue: 'Become a Member' }),
         primaryButtonUrl: fields.url({ label: 'Primary button URL' }),
         secondaryButtonLabel: fields.text({ label: 'Secondary button label', defaultValue: 'View Upcoming Events' }),

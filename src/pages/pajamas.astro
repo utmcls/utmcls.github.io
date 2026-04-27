@@ -1,0 +1,72 @@
+---
+export const prerender = true;
+
+import '../styles/global.css';
+import faviconLight from '../assets/favicon-light.png';
+import faviconDark from '../assets/favicon-dark.png';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A tiny interactive ambiguity puzzle to kick off computational linguistics." />
+    <link rel="icon" type="image/png" href={faviconLight.src} />
+    <link rel="icon" type="image/png" href={faviconDark.src} media="(prefers-color-scheme: dark)" />
+    <title>Pajamas – UTM CLS</title>
+  </head>
+  <body class="bg-background text-foreground min-h-screen font-sans antialiased">
+    <main class="min-h-screen flex items-center justify-center px-6">
+      <section class="w-full max-w-2xl text-center">
+        <img
+          src="/images/shooting_elephant.jpeg"
+          alt="A simple drawing of someone shooting an elephant."
+          class="mx-auto mb-8 w-full max-w-xl rounded-xl border border-border bg-card object-contain"
+          loading="eager"
+          decoding="async"
+        />
+        <p class="text-3xl sm:text-4xl font-semibold leading-tight tracking-tight text-primary">
+          I shot an elephant in my pajamas.
+        </p>
+        <p class="mt-4 text-lg sm:text-xl text-muted-foreground">
+          Who wore the pajamas?
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row items-stretch justify-center gap-3">
+          <button
+            type="button"
+            class="rounded-lg border border-border bg-background px-5 py-3 font-medium text-foreground hover:bg-muted"
+            data-answer="I did"
+          >
+            I did
+          </button>
+          <button
+            type="button"
+            class="rounded-lg bg-accent px-5 py-3 font-medium text-accent-foreground hover:opacity-90"
+            data-answer="The elephant did"
+          >
+            The elephant did
+          </button>
+        </div>
+
+        <p id="answer" class="mt-6 text-sm text-muted-foreground hidden" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <script>
+      const answerEl = document.getElementById('answer');
+      const buttons = document.querySelectorAll('button[data-answer]');
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const answer = btn.getAttribute('data-answer');
+          if (!answerEl || !answer) return;
+          answerEl.textContent = `You picked: ${answer}.`;
+          answerEl.classList.remove('hidden');
+        });
+      });
+    </script>
+  </body>
+</html>
+

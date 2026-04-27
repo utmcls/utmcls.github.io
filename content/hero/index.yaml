@@ -1,4 +1,2 @@
-statusLabel: Applications Open
-statusDot: true
 primaryButtonLabel: View Upcoming Events
 primaryButtonUrl: '#events'
